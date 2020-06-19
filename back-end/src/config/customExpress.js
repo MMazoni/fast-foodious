@@ -1,28 +1,25 @@
 const express = require('express');
 const consign = require('consign');
-const bodyParse = require('body-parser');
 const cors = require('cors');
 
 var corsOptions = {
     origin: "http://localhost:8081"
   };
 
-  
 
 module.exports = () => {
     const app = express();
 
     app.use(cors(corsOptions));
-
-    app.use(bodyParse.json());
-    app.use(bodyParse.urlencoded({extended: true}));
+    app.use(express.json())
+    app.use(express.urlencoded({extended: true}));
 
     consign()
-        .include('controllers')
+        .include('models')
+        .then('controllers')
         .into(app);
 
-    const db = require('../models');
-    const Role = db.role;
+    const Role = app.models.role;
 
     function initial() {
         Role.create({
@@ -41,7 +38,7 @@ module.exports = () => {
         });
       }
 
-    db.sequelize.sync({force: true}).then(() => {
+    db.connection.sync({force: true}).then(() => {
         console.log('Ressincronização do BD');
         initial();
     });
