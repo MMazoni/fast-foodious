@@ -2,34 +2,47 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('orders', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      role_id: {
+      market_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'roles', key: 'id' },
+        references: { model: 'markets', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      name: {
+      courier_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'couriers', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      product_name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
+      expiration_date: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
-      password: {
+      location: {
         type: Sequelize.STRING,
         allowNull: false
-      }
+      },
+      status_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'status', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
     });
-
   },
 
   down: (queryInterface, Sequelize) => {
