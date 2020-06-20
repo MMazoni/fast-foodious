@@ -3,9 +3,20 @@ const Role = require('../models/Role');
 
 module.exports = {
   async index(req, res) {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: { association: 'role' }
+    });
 
     return res.json(users);
+  },
+
+  async show(req, res) {
+    const { user_id } = req.params;
+    const user = await User.findByPk(user_id, {
+      include: { association: 'role' }
+    });
+
+    return res.status(200).json(user);
   },
 
   async store(req, res) {

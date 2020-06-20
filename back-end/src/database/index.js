@@ -13,9 +13,8 @@ Role.init(conn);
 Market.init(conn);
 Courier.init(conn);
 
-
-User.associate(conn.models);
 Role.associate(conn.models);
+User.associate(conn.models);
 Market.associate(conn.models);
 Courier.associate(conn.models);
 

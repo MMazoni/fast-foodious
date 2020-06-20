@@ -13,7 +13,8 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
-    this.hasOne(models.Market);
+    this.hasOne(models.Market, { foreignKey: 'user_id', as: 'market' });
+    this.hasOne(models.Courier, { foreignKey: 'user_id', as: 'courier' });
   }
 }
 
