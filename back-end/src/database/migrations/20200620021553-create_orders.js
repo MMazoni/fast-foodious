@@ -18,7 +18,7 @@ module.exports = {
       },
       courier_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: { model: 'couriers', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -38,6 +38,7 @@ module.exports = {
       status_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 1,
         references: { model: 'status', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',

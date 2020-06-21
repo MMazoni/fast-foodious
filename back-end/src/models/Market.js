@@ -9,6 +9,7 @@ class Market extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.hasMany(models.Order, { foreignKey: 'market_id', as: 'orders' });
   }
 }
 
