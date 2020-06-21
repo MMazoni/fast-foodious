@@ -1,12 +1,10 @@
 const Order = require('../models/Order');
-const User = require('../models/User');
+const Courier = require('../models/Courier');
 
 module.exports = {
   async index(req, res) {
     const orders = await Order.findAll({
-      include: [{
-          association: 'market'
-        },
+      include: [
         {
           association: 'courier'
         },
@@ -19,23 +17,63 @@ module.exports = {
     return res.status(200).json(orders);
   },
 
-  async show(req, res) {
+  async orderByMarket(req, res) {
     const { market_id } = req.params;
-    const order = await Order.findOne({
-      where: {
-        market_id
-      }
-    }, {
+    const order = await Order.findAll(
+      {
       include: [{
           association: 'market'
         },
         {
-          association: 'courier'
+          association: 'courier',
+          include: { 
+            association: 'user',
+            attributes: {
+              exclude: ['id', 'password']
+            }
+          }
         },
         {
           association: 'status'
         }
       ]
+    },{
+      where: {
+        market_id
+      }
+    });
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    return res.status(200).json(order);
+  },
+
+  async orderByStatus(req, res) {
+    const { status_id } = req.params;
+    const order = await Order.findAll(
+      {
+      include: [{
+          association: 'market'
+        },
+        {
+          association: 'courier',
+          include: { 
+            association: 'user',
+            attributes: {
+              exclude: ['id', 'password']
+            }
+          }
+        },
+        {
+          association: 'status'
+        }
+      ]
+    },{
+      where: {
+        status_id
+      }
     });
 
     if (!order) {
@@ -48,7 +86,7 @@ module.exports = {
   async store(req, res) {
     const { market_id, product_name, expiration_date, location } = req.body;
 
-    const order = await Order.create({
+    await Order.create({
       market_id,
       product_name,
       expiration_date,
@@ -61,16 +99,24 @@ module.exports = {
   async colectOrder(req, res) {
     const { order_id } = req.params;
 
-    const { courier_id } = req.body;
+    const { user_id } = req.body;
 
-    const order = Order.findByPk(order_id);
+    const order = await Order.findByPk(order_id);
+
+    const courier = await Courier.findOne({
+      where: { user_id }
+    });
+
+    if(!courier) {
+      return res.status(404).json({ message: 'Courier not found.' });
+    }
 
     if (!order) {
       return res.status(404).json({ message: 'Order not found.' });
     }
 
-    const newOrder = Order.update({
-      courier_id,
+    await Order.update({
+      courier_id: courier.id,
       status_id: 2
     }, {
       where: {
@@ -78,7 +124,7 @@ module.exports = {
       }
     });
 
-    return res.status(200).json({ message: 'Order succesfully collected.' });
+    return res.status(200).json({ message: 'Order in progress.' });
 
   }
 }
