@@ -54,23 +54,6 @@ module.exports = {
     const { status_id } = req.params;
     const order = await Order.findAll(
       {
-      include: [{
-          association: 'market'
-        },
-        {
-          association: 'courier',
-          include: { 
-            association: 'user',
-            attributes: {
-              exclude: ['id', 'password']
-            }
-          }
-        },
-        {
-          association: 'status'
-        }
-      ]
-    },{
       where: {
         status_id
       }
