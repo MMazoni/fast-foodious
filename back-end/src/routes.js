@@ -24,9 +24,11 @@ routes.get('/couriers', CourierController.index);
 routes.get('/couriers/:courier_id', CourierController.show);
 //Order
 routes.get('/orders', OrderController.index);
-routes.get('/orders/market/:market_id', OrderController.orderByMarket);
+routes.get('/orders/user/:user_id/', OrderController.orderByMarket);
 routes.get('/orders/status/:status_id', OrderController.orderByStatus);
+routes.get('/orders/courier/:user_id', OrderController.ordersWithCourier);
 routes.post('/orders', OrderController.store);
 routes.patch('/orders/:order_id', OrderController.colectOrder);
+
 
 module.exports = routes;

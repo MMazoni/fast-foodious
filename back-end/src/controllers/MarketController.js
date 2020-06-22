@@ -3,7 +3,13 @@ const User = require('../models/User');
 
 module.exports = {
   async index(req, res) {
-    const markets = await Market.findAll({ include: { association: 'user' } });
+    const markets = await Market.findAll({ include: { 
+      association: 'user',
+      attributes: {
+        exclude: ['id', 'password']
+      } 
+    
+    } });
 
     return res.status(200).json(markets);
   },
@@ -21,7 +27,7 @@ module.exports = {
     });
 
     if (!market) {
-      return res.status(404).json({ message: 'Market not found.'});
+      return res.status(404).json({ message: 'Market not found.' });
     }
 
     return res.status(200).json(market);

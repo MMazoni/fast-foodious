@@ -10,7 +10,7 @@ module.exports = {
   async store(req, res) {
     const { name } = req.body;
 
-    const role = await Role.create({ name });
+    await Role.create({ name });
 
     return res.status(201).json({ message: 'Role succesfully created.' });
   },

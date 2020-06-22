@@ -29,7 +29,7 @@ module.exports = {
     });
 
     if (!courier) {
-      return res.status(404).json({ message: 'Market not found.'});
+      return res.status(404).json({ message: 'Market not found.' });
     }
 
     return res.status(200).json(courier);

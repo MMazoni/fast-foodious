@@ -5,6 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('orders', [{
       market_id: 1,
       product_name: "Arroz",
+      quantity: 15,
       expiration_date: "2020-06-26",
       location: "Rua Dez, 90 - Centro - São Paulo",
     }], {});

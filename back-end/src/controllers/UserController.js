@@ -10,7 +10,12 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   async index(req, res) {
     const users = await User.findAll({
-      include: { association: 'role' }
+      attributes: {
+        exclude: ['password']
+      },
+      include: { 
+        association: 'role',
+      }
     });
 
     return res.json(users);
@@ -35,6 +40,18 @@ module.exports = {
 
     const role = await Role.findByPk(role_id);
 
+    if (!role) {
+      return res.status(404).json({ error: 'Role not found.' });
+    }
+
+    const userEmail = await User.findOne({
+      where: { email }
+    })
+
+    if (userEmail) {
+      return res.status(400).json({ message: "Email already taken." });
+    }
+
     const user = await User.create({
       role_id: role_id,
       name: name,
@@ -42,9 +59,7 @@ module.exports = {
       password: bcrypt.hashSync(password, 8)
     });
 
-    if (!role) {
-      return res.status(404).json({ error: 'Role not found.' });
-    }
+
     if (role_id == 1) {
       Market.create({
         user_id: user.id

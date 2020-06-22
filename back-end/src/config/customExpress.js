@@ -5,7 +5,7 @@ const routes = require('../routes');
 
 var corsOptions = {
     origin: "http://localhost:8081"
-  };
+};
 
 
 module.exports = () => {
@@ -13,13 +13,13 @@ module.exports = () => {
 
     app.use(cors(corsOptions));
     app.use(express.json())
-    app.use(express.urlencoded({extended: true}));
+    app.use(express.urlencoded({ extended: true }));
     app.use(routes);
 
     consign()
         .include('src/controllers')
         .into(app);
-    
+
     return app;
 };
 
