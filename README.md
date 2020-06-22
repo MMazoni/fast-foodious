@@ -2,6 +2,27 @@
 
 Um serviço de coleta de produtos que estão perto para vencer. O mercado cadastra uma solicitação com o produto, data de validade e local. O coletor recebe essas solicitações e podem pegá-las ou ignorá-las.
 
+Tela de boas vindas
+
+![Welcome](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/df57c15f63e15b3ce95004981c323c9b/Screenshot_2020-06-21_23-59-03.png)
+
+Login
+
+![Login](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/ec227fa87981445399bdda420a899745/Screenshot_2020-06-21_23-59-53.png)
+
+Cadastro
+
+![Cadastro](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/3dd2e94067cb5f251e82c9454f8fa523/Screenshot_2020-06-22_00-46-15.png)
+
+
+Listagem de Produtos
+
+![Lista de Produtos](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/0c4d734a740930b6fa7542a88af73dda/Screenshot_2020-06-22_00-33-37.png)
+
+Listagem de Produtos a Coletor
+
+![Produtos a coletar](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/93fb89750d85f4dfbaa1ea7b3359a57b/Screenshot_2020-06-22_00-34-30.png)
+
 ## Project setup
 
 #### Back-end
@@ -41,8 +62,10 @@ Agora é necessário criar as tabelas e os dados de exemplo, estou utilizando o 
 ```
 cd back-end
 npx sequelize db:migrate  # cria todas as tabelas
-npx sequelize db:seed:all  # cria todos os registros 
+npx sequelize db:seed:all  # cria todos os registros de status e role
 ```
+
+Para criar usuários ou solicitações será necessário fazer manualmente pelo cliente ou pela API.
 
 ### Requirements
 
@@ -67,7 +90,12 @@ npx sequelize db:seed:all  # cria todos os registros
 - axios
 - vue-router
 - moment
-
+- bootstrap
+- jquery
+- popper.js
+- node-sass
+- sass-loader
+- vue-template-compiler
 
 ### Ferramentas
 
@@ -110,9 +138,11 @@ GET - `/couriers/{courier_id}` - Exibe um coletor por Id
 
 GET - `/orders` - Lista todas as solicitações
 
-GET - `/orders/market/{market_id}` - Lista as solicitações por Id do mercado
+GET - `/orders/user/{user_id}` - Lista as solicitações por Id do usuário(Mercados)
 
-GET - `/orders/status/{status}` - Lista as solicitações por Id do status
+GET - `/orders/status/{status_id}` - Lista as solicitações por Id do status
+
+GET - `/orders/courier/{user_id}` - Lista as solicitações por Id do usuário(Coletor) com status em andamento
 
 POST - `/orders` - Criar uma solicitação
 
