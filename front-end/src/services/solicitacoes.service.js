@@ -16,6 +16,7 @@ export  function setSolicitacoesMercado(data){
     return Solicitacoes.post('orders', {
         market_id: data.mercado,
         product_name: data.produto,
+        quantity: data.quantidade,
         expiration_date: data.data,
         location: data.local
     })

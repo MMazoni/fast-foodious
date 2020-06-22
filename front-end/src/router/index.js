@@ -28,6 +28,16 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/register',
+      name: 'Cadastro',
+      component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/Cadastro.vue')
+      },
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
       path: '/lista-solicitacoes-mercado',
       name: 'ListaSolicitacoesMercado',
       component: function () {

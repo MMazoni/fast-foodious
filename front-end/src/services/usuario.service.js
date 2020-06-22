@@ -11,6 +11,15 @@ export function login(data){
         password : data.password
     })
 }
+
+export function cadastrar(id, data){
+    return Usuario.post('users/roles/' + id, {
+        name: data.name,
+        email : data.email,
+        password : data.password
+    })
+}
+
 export function logout(data){
     localStorage.setItem(data,null);
     localStorage.setItem('role_id',null);

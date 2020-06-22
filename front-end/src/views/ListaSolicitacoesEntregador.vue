@@ -8,6 +8,7 @@
                     <div class="card mb-3"  :id="'card-'+ row.id" v-on:click="selected(row.id)">
                         <div class="card-body">
                             <p><strong>Nome do produto : </strong> {{row.product_name}}</p>
+                            <p><strong>Quantidade : </strong> {{row.quantity}}</p>
                             <p><strong>Data de validade : </strong> {{ dateFormat(row.expiration_date)}}</p>
                             <p><strong>Local de coleta : </strong> {{row.location}}</p>
                         </div>

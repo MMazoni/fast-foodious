@@ -8,6 +8,7 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
                 <th scope="col">Data de validade</th>
                 <th scope="col">Local de coleta</th>
                 </tr>
@@ -16,6 +17,7 @@
                 <tr v-for="row in solicitacoes" :key="row.id">
                 <th scope="row">{{row.id}}</th>
                 <td>{{row.product_name}}</td>
+                <td>{{row.quantity}}</td>
                 <td>{{dateFormat(row.expiration_date)}}</td>
                 <td>{{row.location}}</td>
                 </tr>

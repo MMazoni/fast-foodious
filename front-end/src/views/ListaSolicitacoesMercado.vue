@@ -9,6 +9,7 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
                 <th scope="col">Local de coleta</th>
                 <th scope="col">Coletor</th>
                 <th scope="col">Status</th>
@@ -18,6 +19,7 @@
                 <tr v-for="row in solicitacoes" :key="row.id">
                 <th scope="row">{{row.id}}</th>
                 <td>{{row.product_name}}</td>
+                <td>{{row.quantity}}</td>
                 <td>{{row.location}}</td>
                 <td>{{row.courier ? row.courier.user.name : '-'}}</td>
                 <td><p v-bind:class="setStatus(row.status.id)"><small>{{row.status.name}}</small></p></td>

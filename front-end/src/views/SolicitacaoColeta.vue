@@ -15,6 +15,11 @@
                             v-model="produto" required placeholder="Digite o nome do produto">
                         </div>
                         <div class="form-group">
+                            <label for="quantidade">Quantidade</label>
+                            <input type="number" class="form-control" id="quantidade" 
+                            v-model="quantidade" required placeholder="Digite a quantidade do produto">
+                        </div>
+                        <div class="form-group">
                             <label for="dataValidade">Data de validade</label>
                             <input type="date" class="form-control" id="dataValidade" 
                             v-model="data" required placeholder="Digite a data de validade">
@@ -94,6 +99,7 @@ export default {
   data(){
     return {
       produto : "",
+      quantidade: "",
       mercado : "",
       msg: "",
       cep: "",
@@ -109,6 +115,7 @@ export default {
       const data  = {
         mercado: 1,
         produto: this.produto,
+        quantidade: this.quantidade,
         data: this.data,
         local: this.rua + ', '+
         this.numero + ' - ' + this.bairro + ', ' +

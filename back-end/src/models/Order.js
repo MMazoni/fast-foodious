@@ -4,6 +4,7 @@ class Order extends Model {
   static init(sequelize) {
     super.init({
       product_name: DataTypes.STRING,
+      quantity: DataTypes.INTEGER,
       expiration_date: DataTypes.DATE,
       location: DataTypes.STRING,
       market_id: DataTypes.INTEGER,

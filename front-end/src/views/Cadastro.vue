@@ -1,5 +1,5 @@
 <template>
-  <div id="form">
+  <div class="form">
     <header>
       <a href=""><h1>Fast&Food'ious</h1></a>
     </header>
@@ -8,8 +8,13 @@
         <div class="col-8">
           <div class="card">
             <div class="card-body">
-              <h4 class="mb-4 mt-2">Agora precisamos que você se identifique...</h4>
-              <form  @submit.prevent="logar">
+              <h4 class="mb-4 mt-2">Cadastro</h4>
+              <form  @submit.prevent="cadastro">
+                <div class="form-group">
+                  <label for="nome">Nome</label>
+                  <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" 
+                  placeholder="Digite seu nome" v-model="nome" required>
+                </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
@@ -20,11 +25,22 @@
                   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha"
                   v-model="password" required>
                 </div>
+                <div class="form-check">
+                  <input class="form-check-input" v-model="perfil" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
+                  <label class="form-check-label" for="exampleRadios1">
+                    Mercado
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" v-model="perfil" type="radio" name="exampleRadios" id="exampleRadios2" value="2">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Entregador
+                  </label>
+                </div>
                 <small class="text-danger">{{msg}}</small>
-                <router-link :to="{ name: 'Cadastro' }">Sou um novo usuário</router-link>
                 <div class="row justify-content-md-center">
                   <div class="col">
-                    <button type="submit" class="btn btn-dark btn-block mt-4  mb-2">Entrar</button>
+                    <button type="submit" class="btn btn-dark btn-block mt-4  mb-2">Cadastrar</button>
                   </div>
                 </div>
               </form>
@@ -37,32 +53,29 @@
 </template>
 <script>
 // @ is an alias to /src
-import {Usuario, login} from '@/services/usuario.service.js'
+import {Usuario, cadastrar} from '@/services/usuario.service.js'
 export default {
-  name: 'Login',
+  name: 'Cadastro',
   data(){
     return {
-      email : "",
-      password : "",
+      nome: "",
+      email: "",
+      password: "",
+      perfil: "",
       msg: ""
     }
   },
   methods : {
-    logar(){
+    cadastro(){
       if (this.password.length > 0) {
         const data  = {
+          name: this.nome,
           email : this.email,
           password : this.password
         }
-        login(data).then(response => {
-          localStorage.setItem('user',response.data.accessToken);
-          localStorage.setItem('role_id',response.data.role_id);
-          localStorage.setItem('id',response.data.id);
-          if(response.data.role_id == 1){
-            this.$router.push('lista-solicitacoes-mercado');
-          }else{
-            this.$router.push('lista-solicitacoes-entregador');
-          }
+        cadastrar(this.perfil, data).then(response => {
+          console.log(response.data)
+          this.$router.push('lista-solicitacoes-mercado');
         })
         .catch(error =>{
           this.msg = error.response.data.message;
@@ -74,7 +87,7 @@ export default {
 
 </script>
 <style lang="scss" scope>
-#form{
+.form{
   header{
     background: #55be5a;
     padding: 1rem 3rem;
