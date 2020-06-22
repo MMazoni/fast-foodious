@@ -1,5 +1,5 @@
 const express = require('express');
-const consign = require('consign');
+
 const cors = require('cors');
 const routes = require('../routes');
 
@@ -15,10 +15,6 @@ module.exports = () => {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }));
     app.use(routes);
-
-    consign()
-        .include('src/controllers')
-        .into(app);
 
     return app;
 };

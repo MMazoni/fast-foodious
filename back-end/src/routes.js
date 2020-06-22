@@ -1,34 +1,35 @@
 const express = require('express');
-const UserController = require('./controllers/UserController');
-const MarketController = require('./controllers/MarketController');
-const RoleController = require('./controllers/RoleController');
-const CourierController = require('./controllers/CourierController');
-const OrderController = require('./controllers/OrderController');
+const consign = require('consign');
 
+consign()
+        .include('src/controllers')
+        .into(express);
 
 const routes = express.Router();
 
+
+
 //User
-routes.get('/users', UserController.index);
-routes.get('/users/:user_id', UserController.show);
-routes.post('/users/roles/:role_id', UserController.signup);
-routes.post('/users/login', UserController.login);
+routes.get('/users', express.src.controllers.UserController.index);
+routes.get('/users/:user_id', express.src.controllers.UserController.show);
+routes.post('/users/roles/:role_id', express.src.controllers.UserController.signup);
+routes.post('/users/login', express.src.controllers.UserController.login);
 //Role
-routes.get('/roles', RoleController.index);
-routes.post('/roles', RoleController.store);
+routes.get('/roles', express.src.controllers.RoleController.index);
+routes.post('/roles', express.src.controllers.RoleController.store);
 //Market
-routes.get('/markets', MarketController.index);
-routes.get('/markets/:market_id', MarketController.show);
+routes.get('/markets', express.src.controllers.MarketController.index);
+routes.get('/markets/:market_id', express.src.controllers.MarketController.show);
 //Courier
-routes.get('/couriers', CourierController.index);
-routes.get('/couriers/:courier_id', CourierController.show);
+routes.get('/couriers', express.src.controllers.CourierController.index);
+routes.get('/couriers/:courier_id', express.src.controllers.CourierController.show);
 //Order
-routes.get('/orders', OrderController.index);
-routes.get('/orders/user/:user_id/', OrderController.orderByMarket);
-routes.get('/orders/status/:status_id', OrderController.orderByStatus);
-routes.get('/orders/courier/:user_id', OrderController.ordersWithCourier);
-routes.post('/orders', OrderController.store);
-routes.patch('/orders/:order_id', OrderController.colectOrder);
+routes.get('/orders', express.src.controllers.OrderController.index);
+routes.get('/orders/user/:user_id/', express.src.controllers.OrderController.orderByMarket);
+routes.get('/orders/status/:status_id', express.src.controllers.OrderController.orderByStatus);
+routes.get('/orders/courier/:user_id', express.src.controllers.OrderController.ordersWithCourier);
+routes.post('/orders', express.src.controllers.OrderController.store);
+routes.patch('/orders/:order_id', express.src.controllers.OrderController.colectOrder);
 
 
 module.exports = routes;
