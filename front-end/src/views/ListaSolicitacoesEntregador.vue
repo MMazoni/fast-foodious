@@ -42,9 +42,10 @@ export default {
             this.solicitacoes = response.data;
         });
     },
-    watch: {
-        deep: true,
-        msg: function handler(msg){
+    watch: {   
+        msg: {
+            deep: true,
+            handler(msg) {
             if(this.msg === true){
                 window.scrollTo(0, 0);
                 getSolicitacoesEntregadores(localStorage.getItem('id')).then(response => {
@@ -86,6 +87,7 @@ export default {
         }
     }
   }
+    }
 }
 
 
