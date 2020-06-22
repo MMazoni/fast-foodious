@@ -2,24 +2,24 @@
 
 Um serviço de coleta de produtos que estão perto para vencer. O mercado cadastra uma solicitação com o produto, data de validade e local. O coletor recebe essas solicitações e podem pegá-las ou ignorá-las.
 
-Tela de boas vindas
+#### Tela de boas vindas
 
 ![Welcome](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/df57c15f63e15b3ce95004981c323c9b/Screenshot_2020-06-21_23-59-03.png)
 
-Login
+#### Login
 
 ![Login](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/ec227fa87981445399bdda420a899745/Screenshot_2020-06-21_23-59-53.png)
 
-Cadastro
+#### Cadastro
 
 ![Cadastro](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/3dd2e94067cb5f251e82c9454f8fa523/Screenshot_2020-06-22_00-46-15.png)
 
 
-Listagem de Produtos
+#### Listagem de Produtos
 
 ![Lista de Produtos](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/0c4d734a740930b6fa7542a88af73dda/Screenshot_2020-06-22_00-33-37.png)
 
-Listagem de Produtos a Coletor
+#### Listagem de Produtos ao Coletor
 
 ![Produtos a coletar](https://trello-attachments.s3.amazonaws.com/5a9ae0207136de1a7071186c/5eea5c193ea4730190085d44/93fb89750d85f4dfbaa1ea7b3359a57b/Screenshot_2020-06-22_00-34-30.png)
 
@@ -47,9 +47,11 @@ npm run dev
 
 Obs: Faça nessa ordem, pois o front-end tem que está na porta 8081
 
-### Banco de Dados
+Digite no navegador `localhost:8081` para acessar o site.
 
-Utilizado um container MySQL docker para persistir os dados. Se não quiser utilizar, altere o arquivo `./back-end/src/config/database.js` com a conexão do banco local.
+## DB
+
+Utilizado um container MySQL docker para persistir os dados. Se não quiser utilizar, altere o arquivo `./back-end/src/config/database.js` com a conexão de seu banco local.
 
 Na raiz do projeto, dê esse comando se tiver o `docker-compose` instalado:
 
@@ -67,7 +69,7 @@ npx sequelize db:seed:all  # cria todos os registros de status e role
 
 Para criar usuários ou solicitações será necessário fazer manualmente pelo cliente ou pela API.
 
-### Requirements
+## Requirements
 
 É preciso ter o [nodejs](https://nodejs.org/en/download/), para instalar todas as dependências.
 
@@ -97,14 +99,14 @@ Para criar usuários ou solicitações será necessário fazer manualmente pelo 
 - sass-loader
 - vue-template-compiler
 
-### Ferramentas
+## Tools
 
 - Node.js
 - Vue.js
 - MySQL
 - Docker
 
-### API Endpoints
+## API Endpoints
 
 #### User
 
